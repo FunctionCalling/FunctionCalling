@@ -78,7 +78,7 @@ Currently, the generated allTools is only available for use with [Anthropic Clau
 To use the `FunctionCalling` macro in a SwiftPM project, add the following line to the dependencies in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/fumito-ito/FunctionCalling", from: "1.0.0"),
+.package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.0.1"),
 ```
 
 Include "FunctionCalling" as a dependency for your executable target:
