@@ -9,11 +9,17 @@ import Foundation
 import Mustache
 import CommonModules
 
+/// A structure representing a function with a name, parameters, and static status.
 struct Function {
+    /// The name of the function.
     let name: String
+    /// The parameters of the function.
     let parameters: [Parameter]
+    /// Indicates whether the function is static.
     let isStatic: Bool
 
+    /// Initializes a `Function` instance from a `FunctionDeclaration`.
+    /// - Parameter decl: The `FunctionDeclaration` to initialize from.
     init(from decl: FunctionDeclaration) {
         self.name = decl.name
         self.parameters = decl.parameters
@@ -24,6 +30,11 @@ struct Function {
         self.isStatic = decl.isStatic
     }
 
+    /// Initializes a `Function` instance with the given method name, parameters, and static status.
+    /// - Parameters:
+    ///   - methodName: The name of the method.
+    ///   - parameters: An array of `Parameter` objects.
+    ///   - isStatic: A boolean indicating whether the method is static.
     init(methodName: String, parameters: [Parameter], isStatic: Bool) {
         self.name = methodName
         self.parameters = parameters

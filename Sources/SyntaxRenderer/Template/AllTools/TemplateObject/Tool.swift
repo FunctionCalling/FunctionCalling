@@ -9,6 +9,9 @@ import Foundation
 import CommonModules
 
 extension Tool {
+    /// Initializes a `Tool` instance from a `FunctionDeclaration`.
+    /// - Parameter decl: The `FunctionDeclaration` to initialize from.
+    /// - Throws: An error if the initialization fails.
     init(from decl: FunctionDeclaration) throws {
         self.init(
             name: decl.name,

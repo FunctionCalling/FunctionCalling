@@ -12,6 +12,7 @@ import SyntaxRenderer
 import SwiftSyntax
 import SwiftSyntaxMacros
 
+/// A structure representing a macro that adds function calling capabilities to types.
 public struct FunctionCallingMacro: ExtensionMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -31,6 +32,13 @@ public struct FunctionCallingMacro: ExtensionMacro {
         ]
     }
 
+    /// Renders the extension syntax from the given type, function declarations, and service.
+    /// - Parameters:
+    ///   - type: The type syntax protocol for which the extension is being rendered.
+    ///   - declarations: An array of function declarations.
+    ///   - service: The service for function calling.
+    /// - Throws: An error if rendering the extension syntax fails.
+    /// - Returns: An `ExtensionDeclSyntax` representing the extension.
     static private func renderExtensionSyntax(
         from type: some TypeSyntaxProtocol,
         with declarations: [FunctionDeclaration],

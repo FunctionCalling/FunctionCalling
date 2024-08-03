@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+    /// A computed property that returns a new string with all empty lines removed.
     var emptyLineRemoved: Self {
         let lines = split(separator: "\n", omittingEmptySubsequences: false)
 

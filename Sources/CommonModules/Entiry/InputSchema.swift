@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// The class that represents the schema for Function Calling
 public class InputSchema {
+    /// Type of schema
     public let type: DataType
     public let format: String?
     public let description: String?

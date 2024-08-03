@@ -7,11 +7,22 @@
 
 import Foundation
 
+/// A structure representing a tool
 public struct Tool {
+    /// The name of the tool.
     public let name: String
+
+    /// A description of the tool.
     public let description: String
+
+    /// The input schema for the tool.
     public let inputSchema: InputSchema
 
+    /// Initializes a new `Tool` instance.
+    /// - Parameters:
+    ///   - name: The name of the tool.
+    ///   - description: A description of the tool.
+    ///   - inputSchema: The input schema for the tool.
     public init(name: String, description: String, inputSchema: InputSchema) {
         self.name = name
         self.description = description

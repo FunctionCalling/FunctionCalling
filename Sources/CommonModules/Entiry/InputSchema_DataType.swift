@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  InputSchema_DataType.swift
 //  
 //
 //  Created by 伊藤史 on 2024/07/29.
@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An enumeration that represents the schema type for Function Calling
 public extension InputSchema {
     enum DataType: String, Codable {
         /// A string type contains `byte`, `binary`, `date`, `date-time` and `password` format

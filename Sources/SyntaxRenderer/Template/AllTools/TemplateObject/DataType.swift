@@ -9,6 +9,8 @@ import Foundation
 import CommonModules
 
 extension InputSchema.DataType {
+    /// Initializes an `InputSchema.DataType` instance from a `JSONSchemaType`.
+    /// - Parameter fromJSONSchemaType: The `JSONSchemaType` to initialize from.
     init(fromJSONSchemaType: FunctionParameterTypeDeclaration.JSONSchemaType) {
         switch fromJSONSchemaType {
         case .string:
@@ -28,6 +30,8 @@ extension InputSchema.DataType {
 }
 
 extension FunctionParameterTypeDeclaration {
+    /// A computed property that returns the JSON Schema type for the function parameter.
+    /// - Throws: `FunctionCallingError.typeNotSupportedJSONSchema` if the type is not supported by JSON Schema.
     var jsonSchemaType: JSONSchemaType {
         get throws {
             guard let jsonSchemaType = JSONSchemaType(fromSwiftTypeString: name) else {
@@ -38,10 +42,11 @@ extension FunctionParameterTypeDeclaration {
         }
     }
 
-    /// Representing the types supported by JSONSchema.
+    /// An enumeration representing the types supported by JSON Schema.
     ///
-    /// - https://json-schema.org/understanding-json-schema/reference/type
-    /// - https://developer.apple.com/documentation/swift/swift-standard-library#values-and-collections
+    /// - SeeAlso:
+    ///   - https://json-schema.org/understanding-json-schema/reference/type
+    ///   - https://developer.apple.com/documentation/swift/swift-standard-library#values-and-collections
     enum JSONSchemaType: String, RawRepresentable {
         case string
         case number
@@ -53,6 +58,8 @@ extension FunctionParameterTypeDeclaration {
         case array
         case boolean
 
+        /// Initializes a `JSONSchemaType` from a Swift type string.
+        /// - Parameter typeLiteral: The Swift type string to initialize from.
         init?(fromSwiftTypeString typeLiteral: String) {
             let unwrappedTypeLiteral = typeLiteral.replacingOccurrences(of: "?", with: "")
             switch unwrappedTypeLiteral {

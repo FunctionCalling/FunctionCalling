@@ -9,6 +9,7 @@ import Foundation
 import SwiftSyntax
 
 extension Trivia {
+    /// A computed property that returns the documentation comments as a single string.
     var toDocCommentString: String {
         pieces.compactMap { piece in
             switch piece {
@@ -20,6 +21,7 @@ extension Trivia {
         }.joined(separator: "\n")
     }
 
+    /// A computed property that indicates whether the trivia contains any documentation comments.
     var containsDocComment: Bool {
         pieces.contains { piece in
             switch piece {

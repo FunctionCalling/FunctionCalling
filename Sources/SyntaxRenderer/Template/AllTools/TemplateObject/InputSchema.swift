@@ -9,6 +9,9 @@ import Foundation
 import CommonModules
 
 extension InputSchema {
+    /// Convenience initializer to create an `InputSchema` from a `FunctionDeclaration`.
+    /// - Parameter decl: The `FunctionDeclaration` to initialize from.
+    /// - Throws: An error if the initialization fails.
     convenience init(from decl: FunctionDeclaration) throws {
         self.init(
             type: .object,
@@ -24,6 +27,9 @@ extension InputSchema {
         )
     }
 
+    /// Convenience initializer to create an `InputSchema` from a `FunctionParameterDeclaration`.
+    /// - Parameter decl: The `FunctionParameterDeclaration` to initialize from.
+    /// - Throws: An error if the initialization fails.
     convenience init(fromParameterDecl decl: FunctionParameterDeclaration) throws {
         self.init(
             type: decl.type.isArray ? .array : .init(fromJSONSchemaType: try decl.type.jsonSchemaType),

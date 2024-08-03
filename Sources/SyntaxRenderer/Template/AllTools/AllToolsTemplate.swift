@@ -8,9 +8,13 @@
 import Foundation
 import CommonModules
 
+/// An enumeration for different templates used to render all tools.
 enum AllToolsTemplate {
+    /// Template for Claude.
     case claude
 
+    /// Initializes an `AllToolsTemplate` based on the given service.
+    /// - Parameter service: The `FunctionCallingService` to determine the template.
     init(service: FunctionCallingService) {
         switch service {
         case .claude:
@@ -18,6 +22,10 @@ enum AllToolsTemplate {
         }
     }
 
+    /// Renders the tools using the specified template.
+    /// - Parameter templateObject: An array of `Tool` objects to be rendered.
+    /// - Throws: An error if the rendering or encoding fails.
+    /// - Returns: A `String` representation of the rendered tools.
     func render(with templateObject: [Tool]) throws -> String {
         switch self {
         case .claude:

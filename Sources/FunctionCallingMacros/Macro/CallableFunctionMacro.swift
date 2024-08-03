@@ -8,6 +8,9 @@
 import SwiftSyntax
 import SwiftSyntaxMacros
 
+/// A structure representing a macro that marks methods as callable functions.
+///
+/// This is just an annotation to detect which method should be callable.
 public struct CallableFunctionMacro: PeerMacro {
     public static func expansion(
         of node: AttributeSyntax,

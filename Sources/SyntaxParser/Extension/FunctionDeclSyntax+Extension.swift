@@ -9,15 +9,19 @@ import Foundation
 import SwiftSyntax
 import DocumetationComment
 
+/// An extension for `FunctionDeclSyntax` to provide additional computed properties for various function attributes and metadata.
 extension FunctionDeclSyntax {
+    /// A computed property that returns the function's name as text.
     var nameText: String {
         name.text
     }
 
+    /// A computed property that returns an array of the function's parameters.
     var parameters: [FunctionParameterSyntax] {
         signature.parameterClause.parameters.map { $0 }
     }
 
+    /// A computed property that returns the documentation comment for the function, if it exists.
     var documentationComment: DocumentationComment? {
         if let commentBeforeAttribute = attributes.first?.leadingTrivia, commentBeforeAttribute.containsDocComment {
             // Pattern: Doc comment above attribute
@@ -51,14 +55,17 @@ extension FunctionDeclSyntax {
         return try? DocumentationComment(funcKeyword.leadingTrivia.toDocCommentString)
     }
 
+    /// A computed property that indicates whether the function is callable, based on its attributes.
     var isCallable: Bool {
         return attributes.contains { $0.isCallable }
     }
 
+    /// A computed property that indicates whether the function is static.
     var isStatic: Bool {
         return modifiers.contains(where: { $0.name.text == "static" })
     }
 
+    /// A computed property that checks if the function has a valid return type.
     var isValidReturnType: Bool {
         guard let returnClauseType = signature.returnClause?.type else {
             // Void
@@ -147,5 +154,4 @@ extension FunctionDeclSyntax {
             }
         }
     }
-
 }
