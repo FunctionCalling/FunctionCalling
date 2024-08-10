@@ -56,12 +56,14 @@ public struct Tool {
     /// ```json
     /// {
     ///  "name": "function",
+    ///  "strict": true,
     ///  "description": "",
     ///  "parameters": { ...(json schema for input parameters)... }
     /// }
     /// ```
     enum ChatGPTCodingKeys: String, CodingKey {
         case name
+        case strict
         case description
         case parameters
     }
@@ -78,6 +80,7 @@ extension Tool: Encodable {
         case .chatGPT:
             var container = encoder.container(keyedBy: ChatGPTCodingKeys.self)
             try container.encode(name, forKey: .name)
+            try container.encode(true, forKey: .strict)
             try container.encode(description, forKey: .description)
             try container.encode(inputSchema, forKey: .parameters)
         }
