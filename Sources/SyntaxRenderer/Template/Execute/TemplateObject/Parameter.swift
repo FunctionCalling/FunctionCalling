@@ -58,7 +58,7 @@ struct Parameter {
 extension Parameter: MustacheBoxable {
     var mustacheBox: MustacheBox {
         Box([
-            "name": omittingName ?? name,
+            "name": isOmitting ? omittingName ?? name : name,
             "required": required,
             "type": type,
             "isLast": isLast,
