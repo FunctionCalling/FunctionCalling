@@ -17,7 +17,7 @@ public struct FunctionParameterDeclaration {
     public let description: String?
     /// Type of this argument
     public let type: FunctionParameterTypeDeclaration
-    
+
     /// Default constructor
     ///
     /// - Parameters:

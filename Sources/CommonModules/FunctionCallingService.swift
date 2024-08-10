@@ -8,7 +8,9 @@
 import Foundation
 
 /// An enumeration representing different function calling services.
-public enum FunctionCallingService: String, RawRepresentable {
+public enum FunctionCallingService: String, Codable {
     /// [Anthropic Claude](https://www.anthropic.com/claude)
     case claude
+    /// [Chat GPT](https://chatgpt.com)
+    case chatGPT
 }

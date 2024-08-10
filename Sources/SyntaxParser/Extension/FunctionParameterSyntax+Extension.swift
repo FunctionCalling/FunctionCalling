@@ -21,7 +21,8 @@ extension FunctionParameterSyntax {
     }
 
     /// A computed property that returns the parameter's type name as a string.
-    /// - Throws: `FunctionCallingError.failedToGetTypeNameFromSyntax` if the type name cannot be determined from the syntax.
+    /// - Throws: `FunctionCallingError.failedToGetTypeNameFromSyntax`
+    /// if the type name cannot be determined from the syntax.
     var typeName: String {
         get throws {
             if let identifierTypeSyntax = type.as(IdentifierTypeSyntax.self) {

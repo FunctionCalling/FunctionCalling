@@ -13,14 +13,12 @@ import CommonModules
 enum AllToolsSyntax {
     /// Renders the tools using the given template type.
     /// - Parameters:
-    ///   - templateObject: An array of `Tool` objects to be rendered.
-    ///   - templateType: The template type to use for rendering. Default is `.claude`.
+    ///   - templateObject: An array of `FunctionTool` objects to be rendered.
     /// - Throws: An error if the rendering fails.
     /// - Returns: A `String` representation of the rendered tools.
     static func render(
-        with templateObject: [Tool],
-        templateType: AllToolsTemplate = .claude
+        with templateObject: [FunctionTool]
     ) throws -> String {
-        return try templateType.render(with: templateObject)
+        return try AllToolsTemplate.render(with: templateObject)
     }
 }

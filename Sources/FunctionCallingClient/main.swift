@@ -1,7 +1,7 @@
 import FunctionCalling
 
 @FunctionCalling(service: .claude)
-struct Foo {
+struct ClaudeTools {
 
     @CallableFunction
     /// This returns "bar" text
@@ -14,5 +14,18 @@ struct Foo {
     @CallableFunction
     static func foo(hoge: Int) -> Int {
         hoge
+    }
+}
+
+@FunctionCalling(service: .chatGPT)
+struct ChatGPTTools {
+    @CallableFunction
+    func getWeather(from location: String) -> String {
+        ""
+    }
+
+    @CallableFunction
+    static func getTemperature(from location: String) -> Int {
+        0
     }
 }

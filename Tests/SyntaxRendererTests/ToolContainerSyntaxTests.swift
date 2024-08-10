@@ -20,8 +20,9 @@ final class ToolContainerSyntaxTests: XCTestCase {
         isStatic: true
     )
 
-    static func generateGetHTMLTool(isLast: Bool) -> Tool {
+    static func generateGetHTMLTool(service: FunctionCallingService) -> Tool {
         .init(
+            service: service,
             name: "getHTML",
             description: "This is description for `getHTML` method.",
             inputSchema: .init(
@@ -40,12 +41,10 @@ final class ToolContainerSyntaxTests: XCTestCase {
         )
     }
 
-    // swiftlint:disable:next function_body_length
     func testGenerateSyntaxFromObject() throws {
         let execute = try ExecuteSyntax.render(with: Execute(functions: [Self.getHTML]))
         let allTools = try AllToolsSyntax.render(
-            with: [Self.generateGetHTMLTool(isLast: true)],
-            templateType: .claude
+            with: [FunctionTool(service: .claude, function: Self.generateGetHTMLTool(service: .claude))]
         )
         let model = ToolContainerExtension(type: "Sample", executeSyntax: execute, allToolsSyntax: allTools)
         let filledTemplate = try ToolContainerExtensionSyntax.render(from: model).description

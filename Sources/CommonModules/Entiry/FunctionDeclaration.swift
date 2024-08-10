@@ -17,7 +17,7 @@ public struct FunctionDeclaration {
     public let parameters: [FunctionParameterDeclaration]
     /// Whether this function is a static function or not
     public let isStatic: Bool
-    
+
     /// Default constructor
     ///
     /// - Parameters:

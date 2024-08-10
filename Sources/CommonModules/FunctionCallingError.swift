@@ -15,8 +15,6 @@ public enum FunctionCallingError: Error {
     case failedToGetServiceFromMacroArgument
     /// Failed to get the type name from the syntax.
     case failedToGetTypeNameFromSyntax
-    /// Failed to get data from the encoded tools.
-    case failedToGetDataFromEncodedTools
     /// The type is not supported by JSON Schema.
     case typeNotSupportedJSONSchema
     /// The return type is unsupported.
@@ -33,8 +31,6 @@ extension FunctionCallingError {
             return "An unknown service name was passed for the argument of macro."
         case .failedToGetTypeNameFromSyntax:
             return "Cannot get the name of function argument type from syntax."
-        case .failedToGetDataFromEncodedTools:
-            return "Cannot get `Data` from encoded `[Tool]` object."
         case .typeNotSupportedJSONSchema:
             return "Cannot convert function arguments to types supported by JSON Schema."
         case .unsupportedReturnType:
