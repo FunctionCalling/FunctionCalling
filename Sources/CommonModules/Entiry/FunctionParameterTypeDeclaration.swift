@@ -15,7 +15,7 @@ public struct FunctionParameterTypeDeclaration {
     public let isOptional: Bool
     /// Whether this type is an array type or not
     public let isArray: Bool
-    
+
     /// Default constructor
     ///
     /// - Parameters:

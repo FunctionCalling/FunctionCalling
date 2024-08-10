@@ -16,9 +16,7 @@ enum AllToolsTemplate {
     /// - Returns: A `String` representation of the rendered tools.
     static func render(with templateObject: [FunctionTool]) throws -> String {
         let tools = try FunctionCallingEncoder.encode(templateObject)
-        guard let jsonString = String(data: tools, encoding: .utf8) else {
-            throw FunctionCallingError.failedToGetDataFromEncodedTools
-        }
+        let jsonString = String(decoding: tools, as: UTF8.self)
 
         return """
         var allTools: String {

@@ -61,10 +61,13 @@ final class ToolTests: XCTestCase {
         let tool = Self.getHTML()
         let jsonData = try FunctionCallingEncoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["description"] as! String, "This is description for `getHTML` method.")
 
             let inputSchema = try XCTUnwrap(dictionary["input_schema"] as? [String: Any])
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(inputSchema["type"] as! String, "object")
 
             let properties = try XCTUnwrap(inputSchema["properties"] as? [String: Any])
@@ -75,7 +78,7 @@ final class ToolTests: XCTestCase {
             XCTAssertEqual(requiredProperties.count, 1)
             XCTAssertEqual(requiredProperties.first, "urlString")
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into dictionary")
         }
     }
 
@@ -100,10 +103,13 @@ final class ToolTests: XCTestCase {
         let tool = Self.getHTML(service: .chatGPT)
         let jsonData = try FunctionCallingEncoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["description"] as! String, "This is description for `getHTML` method.")
 
             let parameters = try XCTUnwrap(dictionary["parameters"] as? [String: Any])
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(parameters["type"] as! String, "object")
 
             let properties = try XCTUnwrap(parameters["properties"] as? [String: Any])
@@ -114,7 +120,7 @@ final class ToolTests: XCTestCase {
             XCTAssertEqual(requiredProperties.count, 1)
             XCTAssertEqual(requiredProperties.first, "urlString")
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into dictionary")
         }
     }
 

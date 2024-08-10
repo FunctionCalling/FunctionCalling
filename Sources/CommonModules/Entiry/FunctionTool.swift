@@ -15,7 +15,7 @@ public enum FunctionToolType: String, Codable {
     case function
     /// There is no type for function
     case none
-    
+
     /// Initializes a `FunctionToolType` instance from a `FunctionCallingService`.
     /// - Parameter service: The `FunctionCallingService` to initalize from.
     init(fromService service: FunctionCallingService) {

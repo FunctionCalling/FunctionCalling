@@ -9,7 +9,8 @@ import Foundation
 import SwiftSyntax
 import DocumetationComment
 
-/// An extension for `FunctionDeclSyntax` to provide additional computed properties for various function attributes and metadata.
+/// An extension for `FunctionDeclSyntax` to provide additional computed properties
+/// for various function attributes and metadata.
 extension FunctionDeclSyntax {
     /// A computed property that returns the function's name as text.
     var nameText: String {

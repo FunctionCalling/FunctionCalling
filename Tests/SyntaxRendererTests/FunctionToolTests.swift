@@ -61,10 +61,13 @@ final class FunctionToolTests: XCTestCase {
         let tool = FunctionTool(service: .claude, function: Self.getHTML())
         let jsonData = try FunctionCallingEncoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["description"] as! String, "This is description for `getHTML` method.")
 
             let inputSchema = try XCTUnwrap(dictionary["input_schema"] as? [String: Any])
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(inputSchema["type"] as! String, "object")
 
             let properties = try XCTUnwrap(inputSchema["properties"] as? [String: Any])
@@ -75,7 +78,7 @@ final class FunctionToolTests: XCTestCase {
             XCTAssertEqual(requiredProperties.count, 1)
             XCTAssertEqual(requiredProperties.first, "urlString")
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into dictionary")
         }
     }
 
@@ -84,15 +87,19 @@ final class FunctionToolTests: XCTestCase {
             FunctionTool(service: .claude, function: Self.getHTML()),
             FunctionTool(service: .claude, function: Self.timeOfDay())
         ]
+
         let jsonData = try FunctionCallingEncoder.encode(tools)
         if let array = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String: Any]] {
             XCTAssertEqual(array.count, 2)
-            
+
             if let getHTML = array.first {
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(getHTML["name"] as! String, "getHTML")
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(getHTML["description"] as! String, "This is description for `getHTML` method.")
 
                 let inputSchema = try XCTUnwrap(getHTML["input_schema"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(inputSchema["type"] as! String, "object")
 
                 let properties = try XCTUnwrap(inputSchema["properties"] as? [String: Any])
@@ -105,10 +112,13 @@ final class FunctionToolTests: XCTestCase {
             }
 
             if let timeOfDay = array.last {
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(timeOfDay["name"] as! String, "timeOfDay")
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(timeOfDay["description"] as! String, "This is description for `timeOfDay` method.")
 
                 let inputSchema = try XCTUnwrap(timeOfDay["input_schema"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(inputSchema["type"] as! String, "object")
 
                 let properties = try XCTUnwrap(inputSchema["properties"] as? [String: Any])
@@ -121,7 +131,7 @@ final class FunctionToolTests: XCTestCase {
                 XCTAssertEqual(requiredProperties.first, "timeZone")
             }
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into arrat")
         }
     }
 
@@ -129,13 +139,17 @@ final class FunctionToolTests: XCTestCase {
         let tool = FunctionTool(service: .chatGPT, function: Self.getHTML(service: .chatGPT))
         let jsonData = try FunctionCallingEncoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["type"] as! String, "function")
 
             let tool = try XCTUnwrap(dictionary["function"] as? [String: Any])
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(tool["name"] as! String, "getHTML")
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(tool["description"] as! String, "This is description for `getHTML` method.")
 
             let parameters = try XCTUnwrap(tool["parameters"] as? [String: Any])
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(parameters["type"] as! String, "object")
 
             let properties = try XCTUnwrap(parameters["properties"] as? [String: Any])
@@ -146,7 +160,7 @@ final class FunctionToolTests: XCTestCase {
             XCTAssertEqual(requiredProperties.count, 1)
             XCTAssertEqual(requiredProperties.first, "urlString")
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into dictionary")
         }
     }
 
@@ -155,16 +169,20 @@ final class FunctionToolTests: XCTestCase {
             FunctionTool(service: .chatGPT, function: Self.getHTML(service: .chatGPT)),
             FunctionTool(service: .chatGPT, function: Self.timeOfDay(service: .chatGPT))
         ]
+
         let jsonData = try FunctionCallingEncoder.encode(tools)
         if let array = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String: Any]] {
             XCTAssertEqual(array.count, 2)
-            
+
             if let getHTML = array.first {
                 let tool = try XCTUnwrap(getHTML["function"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(tool["name"] as! String, "getHTML")
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(tool["description"] as! String, "This is description for `getHTML` method.")
 
                 let parameters = try XCTUnwrap(tool["parameters"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(parameters["type"] as! String, "object")
 
                 let properties = try XCTUnwrap(parameters["properties"] as? [String: Any])
@@ -178,10 +196,13 @@ final class FunctionToolTests: XCTestCase {
 
             if let timeOfDay = array.last {
                 let tool = try XCTUnwrap(timeOfDay["function"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(tool["name"] as! String, "timeOfDay")
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(tool["description"] as! String, "This is description for `timeOfDay` method.")
 
                 let parameters = try XCTUnwrap(tool["parameters"] as? [String: Any])
+                // swiftlint:disable:next force_cast
                 XCTAssertEqual(parameters["type"] as! String, "object")
 
                 let properties = try XCTUnwrap(parameters["properties"] as? [String: Any])
@@ -194,7 +215,7 @@ final class FunctionToolTests: XCTestCase {
                 XCTAssertEqual(requiredProperties.first, "timeZone")
             }
         } else {
-            XCTFail()
+            XCTFail("JSON data should be selialized into array")
         }
     }
 

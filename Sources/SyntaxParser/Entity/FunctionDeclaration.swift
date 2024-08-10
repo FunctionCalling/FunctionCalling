@@ -37,7 +37,7 @@ public extension FunctionDeclaration {
         self.init(
             name: decl.nameText,
             description: documentationComment.raw,
-            parameters:  try decl.parameters.map { syntax in
+            parameters: try decl.parameters.map { syntax in
                 let description = documentationComment.parameters.first(where: { $0.name == syntax.name })
                 return try FunctionParameterDeclaration(from: syntax, description: description?.description)
             },

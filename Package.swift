@@ -31,14 +31,14 @@ let package = Package(
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 "SyntaxParser",
                 "SyntaxRenderer",
-                "CommonModules",
+                "CommonModules"
             ]
         ),
 
         // Library that exposes a macro as part of its API, which is used in client programs.
         .target(name: "FunctionCalling", dependencies: [
             "FunctionCallingMacros",
-            "CommonModules",
+            "CommonModules"
         ]),
 
         .target(name: "SyntaxRenderer", dependencies: [
@@ -46,13 +46,13 @@ let package = Package(
             .product(name: "SwiftSyntax", package: "swift-syntax"),
             .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
             .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
-            .product(name: "Mustache", package: "GRMustache.swift"),
+            .product(name: "Mustache", package: "GRMustache.swift")
         ]),
 
         .target(name: "SyntaxParser", dependencies: [
             "CommonModules",
             .product(name: "SwiftSyntax", package: "swift-syntax"),
-            .product(name: "DocumetationComment", package: "DocumentationComment"),
+            .product(name: "DocumetationComment", package: "DocumentationComment")
         ]),
 
         .target(name: "CommonModules"),
@@ -89,6 +89,6 @@ let package = Package(
                 "CommonModules",
                 .product(name: "SwiftParser", package: "swift-syntax")
             ]
-        ),
+        )
     ]
 )

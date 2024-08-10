@@ -10,7 +10,7 @@ import SwiftSyntax
 import CommonModules
 
 public extension AttributeSyntax {
-    /// A computed property that returns the `FunctionCallingService` if the attribute has a valid service name argument.
+    /// A computed property that returns the `FunctionCallingService` if the attribute has a valid service name argument
     var service: FunctionCallingService? {
         guard
             let serviceName = arguments?.firstArgumentCaseName,

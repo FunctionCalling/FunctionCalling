@@ -41,7 +41,6 @@ final class ToolContainerSyntaxTests: XCTestCase {
         )
     }
 
-    // swiftlint:disable:next function_body_length
     func testGenerateSyntaxFromObject() throws {
         let execute = try ExecuteSyntax.render(with: Execute(functions: [Self.getHTML]))
         let allTools = try AllToolsSyntax.render(
