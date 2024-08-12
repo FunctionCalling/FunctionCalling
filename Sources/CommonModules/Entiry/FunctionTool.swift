@@ -24,6 +24,8 @@ public enum FunctionToolType: String, Codable {
             self = .none
         case .chatGPT:
             self = .function
+        case .llama:
+            self = .none
         }
     }
 }
@@ -70,6 +72,15 @@ extension FunctionTool: Encodable {
             var container = encoder.container(keyedBy: ChatGPTCodingKeys.self)
             try container.encode(type, forKey: .type)
             try container.encode(function, forKey: .function)
+        case .llama:
+            // Llama API accepts JSON with the following structure.
+            // ```json
+            // [{
+            //   { ...(function decralation)... }
+            // }]
+            // ```
+            var container = encoder.singleValueContainer()
+            try container.encode(function)
         }
     }
 }
@@ -82,11 +93,22 @@ extension FunctionTool: Decodable {
             self.type = .function
             self.function = tool
         } else {
-            self.service = .claude
             self.type = .none
 
             let singleValueContainer = try decoder.singleValueContainer()
-            self.function = try singleValueContainer.decode(Tool.self)
+            let function = try singleValueContainer.decode(Tool.self)
+
+            if function.service == .claude {
+                self.service = .claude
+                self.function = function
+            } else {
+                self.service = .llama
+                self.function = .init(
+                    service: .llama,
+                    name: function.name,
+                    description: function.description,
+                    inputSchema: function.inputSchema)
+            }
         }
     }
 }

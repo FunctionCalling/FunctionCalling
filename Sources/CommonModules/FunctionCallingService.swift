@@ -13,4 +13,6 @@ public enum FunctionCallingService: String, Codable {
     case claude
     /// [Chat GPT](https://chatgpt.com)
     case chatGPT
+    /// [Llama](https://www.llama-api.com)
+    case llama
 }
