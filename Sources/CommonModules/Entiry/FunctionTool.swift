@@ -93,11 +93,22 @@ extension FunctionTool: Decodable {
             self.type = .function
             self.function = tool
         } else {
-            self.service = .claude
             self.type = .none
 
             let singleValueContainer = try decoder.singleValueContainer()
-            self.function = try singleValueContainer.decode(Tool.self)
+            let function = try singleValueContainer.decode(Tool.self)
+
+            if function.service == .claude {
+                self.service = .claude
+                self.function = function
+            } else {
+                self.service = .llama
+                self.function = .init(
+                    service: .llama,
+                    name: function.name,
+                    description: function.description,
+                    inputSchema: function.inputSchema)
+            }
         }
     }
 }
