@@ -23,7 +23,7 @@ extension InputSchema {
             properties: try decl.parameters.reduce(into: [String: InputSchema](), { partialResult, parameter in
                 partialResult[parameter.name] = try InputSchema(fromParameterDecl: parameter)
             }),
-            requiredProperties: nil
+            requiredProperties: decl.parameters.filter { $0.type.isOptional == false }.map { $0.name }
         )
     }
 

@@ -25,7 +25,7 @@ struct ChatGPTTools {
     }
 
     @CallableFunction
-    static func getTemperature(from location: String) -> Int {
+    static func getTemperature(_ location: String) -> Int {
         0
     }
 }
