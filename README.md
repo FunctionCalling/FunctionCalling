@@ -71,7 +71,15 @@ Only the following types are supported for the arguments and return values of fu
 - `Bool`
 - `Array of above`
 
-Currently, the generated allTools is only available for use with [Anthropic Claude](https://www.anthropic.com/claude). If there are other services you would like to see supported, please create an issue or submit a pull request.
+## Supporting Services
+
+Currently, the generated `allTools` is available for the follwing services. 
+
+-  [Anthropic Claude](https://www.anthropic.com/claude)
+- [ChatGPT](http://chatgpt.com)
+- [Llama](http://llama-api.com)
+
+If there are other services you would like to see supported, please create an issue or submit a pull request.
 
 ## Installation
 
