@@ -67,6 +67,22 @@ public struct Tool {
         case description
         case parameters
     }
+
+    /// CodingKeys for Llama API
+    ///
+    /// Llama API accepts JSON with the following structure.
+    /// ```json
+    /// {
+    ///  "name": "function",
+    ///  "description": "",
+    ///  "parameters": { ...(json schema for input parameters)... }
+    /// }
+    /// ```
+    enum LlamaCodingKeys: String, CodingKey {
+        case name
+        case description
+        case parameters
+    }
 }
 
 extension Tool: Encodable {
@@ -81,6 +97,11 @@ extension Tool: Encodable {
             var container = encoder.container(keyedBy: ChatGPTCodingKeys.self)
             try container.encode(name, forKey: .name)
             try container.encode(true, forKey: .strict)
+            try container.encode(description, forKey: .description)
+            try container.encode(inputSchema, forKey: .parameters)
+        case .llama:
+            var container = encoder.container(keyedBy: LlamaCodingKeys.self)
+            try container.encode(name, forKey: .name)
             try container.encode(description, forKey: .description)
             try container.encode(inputSchema, forKey: .parameters)
         }
