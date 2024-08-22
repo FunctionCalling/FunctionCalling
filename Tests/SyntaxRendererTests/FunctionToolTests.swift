@@ -264,7 +264,7 @@ final class FunctionToolTests: XCTestCase {
     // MARK: Llama
 
     func testEncodingFunctionForLlama() throws {
-        let tool = FunctionTool(service: .llama, function: Self.getHTML(service: .llama))
+        let tool = FunctionTool(service: .llamaOrGemini, function: Self.getHTML(service: .llamaOrGemini))
         let jsonData = try FunctionCallingEncoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
             // swiftlint:disable:next force_cast
@@ -290,8 +290,8 @@ final class FunctionToolTests: XCTestCase {
 
     func testEncodingFunctionsForLlama() throws {
         let tools = [
-            FunctionTool(service: .llama, function: Self.getHTML(service: .llama)),
-            FunctionTool(service: .llama, function: Self.timeOfDay(service: .llama))
+            FunctionTool(service: .llamaOrGemini, function: Self.getHTML(service: .llamaOrGemini)),
+            FunctionTool(service: .llamaOrGemini, function: Self.timeOfDay(service: .llamaOrGemini))
         ]
 
         let jsonData = try FunctionCallingEncoder.encode(tools)
@@ -342,14 +342,14 @@ final class FunctionToolTests: XCTestCase {
     }
 
     func testDecodingFunctionLlama() throws {
-        let tool = FunctionTool(service: .llama, function: Self.getHTML(service: .llama))
+        let tool = FunctionTool(service: .llamaOrGemini, function: Self.getHTML(service: .llamaOrGemini))
         let jsonData = try FunctionCallingEncoder.encode(tool)
         let result = try FunctionCallingDecoder.decode(FunctionTool.self, from: jsonData)
 
-        XCTAssertEqual(result.service, .llama)
+        XCTAssertEqual(result.service, .llamaOrGemini)
         XCTAssertEqual(result.type, .none)
         XCTAssertEqual(result.function.name, "getHTML")
-        XCTAssertEqual(result.function.service, .llama)
+        XCTAssertEqual(result.function.service, .llamaOrGemini)
         XCTAssertEqual(result.function.description, "This is description for `getHTML` method.")
         XCTAssertEqual(result.function.inputSchema.type, .object)
         XCTAssertEqual(result.function.inputSchema.properties?.count, 1)
