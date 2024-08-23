@@ -99,7 +99,7 @@ extension Tool: Encodable {
             try container.encode(true, forKey: .strict)
             try container.encode(description, forKey: .description)
             try container.encode(inputSchema, forKey: .parameters)
-        case .llama:
+        case .llamaOrGemini:
             var container = encoder.container(keyedBy: LlamaCodingKeys.self)
             try container.encode(name, forKey: .name)
             try container.encode(description, forKey: .description)
@@ -118,8 +118,12 @@ extension Tool: Decodable {
             self.service = .claude
             self.inputSchema = inputSchema
         } else {
-            self.service = .chatGPT
             let chatGPTContainer = try decoder.container(keyedBy: ChatGPTCodingKeys.self)
+            if let _ = try? chatGPTContainer.decode(Bool.self, forKey: .strict) {
+                self.service = .chatGPT
+            } else {
+                self.service = .llamaOrGemini
+            }
             self.inputSchema = try chatGPTContainer.decode(InputSchema.self, forKey: .parameters)
         }
     }
