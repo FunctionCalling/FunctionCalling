@@ -78,6 +78,7 @@ Currently, the generated `allTools` is available for the follwing services.
 -  [Anthropic Claude](https://www.anthropic.com/claude)
 - [ChatGPT](http://chatgpt.com)
 - [Llama](http://llama-api.com)
+- [Gemini](https://ai.google.dev/gemini-api)
 
 If there are other services you would like to see supported, please create an issue or submit a pull request.
 
@@ -86,7 +87,7 @@ If there are other services you would like to see supported, please create an is
 To use the `FunctionCalling` macro in a SwiftPM project, add the following line to the dependencies in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.0.1"),
+.package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.3.0"),
 ```
 
 Include "FunctionCalling" as a dependency for your executable target:
