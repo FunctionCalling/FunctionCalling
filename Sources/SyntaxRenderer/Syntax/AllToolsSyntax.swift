@@ -14,11 +14,13 @@ enum AllToolsSyntax {
     /// Renders the tools using the given template type.
     /// - Parameters:
     ///   - templateObject: An array of `FunctionTool` objects to be rendered.
+    ///   - service: The `FunctionCallingService` used for the tool container.
     /// - Throws: An error if the rendering fails.
     /// - Returns: A `String` representation of the rendered tools.
     static func render(
-        with templateObject: [FunctionTool]
+        with templateObject: [FunctionTool],
+        service: FunctionCallingService
     ) throws -> String {
-        return try AllToolsTemplate.render(with: templateObject)
+        return try AllToolsTemplate.render(with: templateObject, service: service)
     }
 }

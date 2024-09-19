@@ -13,4 +13,3 @@ public typealias InputSchema = CommonModules.InputSchema
 
 public typealias ToolContainer = CommonModules.ToolContainer
 public typealias FunctionCallingError = CommonModules.FunctionCallingError
-public typealias FunctionCallingDecoder = CommonModules.FunctionCallingDecoder

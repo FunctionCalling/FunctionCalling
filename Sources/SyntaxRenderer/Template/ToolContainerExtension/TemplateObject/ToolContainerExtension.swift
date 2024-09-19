@@ -65,6 +65,6 @@ public struct ToolContainerExtension {
         service: FunctionCallingService
     ) throws -> String {
         let templateObject = try functions.map { try FunctionTool(from: $0, service: service) }
-        return try AllToolsSyntax.render(with: templateObject)
+        return try AllToolsSyntax.render(with: templateObject, service: service)
     }
 }

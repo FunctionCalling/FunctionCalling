@@ -44,7 +44,8 @@ final class ToolContainerSyntaxTests: XCTestCase {
     func testGenerateSyntaxFromObject() throws {
         let execute = try ExecuteSyntax.render(with: Execute(functions: [Self.getHTML]))
         let allTools = try AllToolsSyntax.render(
-            with: [FunctionTool(service: .claude, function: Self.generateGetHTMLTool(service: .claude))]
+            with: [FunctionTool(service: .claude, function: Self.generateGetHTMLTool(service: .claude))],
+            service: .claude
         )
         let model = ToolContainerExtension(type: "Sample", executeSyntax: execute, allToolsSyntax: allTools)
         let filledTemplate = try ToolContainerExtensionSyntax.render(from: model).description
