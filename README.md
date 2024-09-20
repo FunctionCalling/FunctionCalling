@@ -39,10 +39,12 @@ extension MyFunctionTools: ToolContainer {
         }
     }
 
-    var allTools: String {
-    """
-    [{"name": "getStockPrice","description": "Get the current stock price for a given ticker symbol.","input_schema": {"type": "object","properties": {"ticker": {"type": "string","description": "The stock ticker symbol, e.g. AAPL for Apple Inc."}},"required": ["ticker"]}}]
-    """
+    var allTools: [Tool]? {
+        guard let data = allToolsJSONString.replacingOccurrences(of: "\n", with: "").data(using: .utf8) else {
+            return nil
+        }
+
+        return try? service.decoder.decode([Tool].self, from: data)
     }
 }
 ```
