@@ -84,10 +84,10 @@ final class AllToolsSyntaxTests: XCTestCase {
     func testVariableDefinition() throws {
         let object = [FunctionTool(service: .claude, function: Self.getHTML)]
 
-        let filledTemplate = try AllToolsSyntax.render(with: object)
+        let filledTemplate = try AllToolsJSONStringSyntax.render(with: object, service: .claude)
         let lines = filledTemplate.split(separator: "\n")
 
-        XCTAssertEqual(lines.first, "var allTools: String {")
+        XCTAssertEqual(lines.first, "var allToolsJSONString: String {")
         XCTAssertEqual(lines[1], """
             \"""
         """)
@@ -100,11 +100,11 @@ final class AllToolsSyntaxTests: XCTestCase {
     func testFillingTemplateWithSingleFunction() throws {
         let object = [FunctionTool(service: .claude, function: Self.getHTML)]
 
-        let filledTemplate = try AllToolsSyntax.render(with: object)
+        let filledTemplate = try AllToolsJSONStringSyntax.render(with: object, service: .claude)
         let jsonString = filledTemplate.split(separator: "\n").dropFirst(2).dropLast(2).joined(separator: "\n")
 
         let jsonData = try XCTUnwrap(jsonString.data(using: .utf8))
-        let tools = try FunctionCallingDecoder.decode([Tool].self, from: jsonData)
+        let tools = try FunctionCallingService.claude.decoder.decode([Tool].self, from: jsonData)
 
         XCTAssertEqual(tools.count, 1)
         let getHTML = try XCTUnwrap(tools.first)
@@ -122,11 +122,11 @@ final class AllToolsSyntaxTests: XCTestCase {
     func testFillingTemplateWithMultipleArgumentsFunction() throws {
         let object = [FunctionTool(service: .claude, function: Self.timeOfDay)]
 
-        let filledTemplate = try AllToolsSyntax.render(with: object)
+        let filledTemplate = try AllToolsJSONStringSyntax.render(with: object, service: .claude)
         let jsonString = filledTemplate.split(separator: "\n").dropFirst(2).dropLast(2).joined(separator: "\n")
 
         let jsonData = try XCTUnwrap(jsonString.data(using: .utf8))
-        let tools = try FunctionCallingDecoder.decode([Tool].self, from: jsonData)
+        let tools = try FunctionCallingService.claude.decoder.decode([Tool].self, from: jsonData)
 
         XCTAssertEqual(tools.count, 1)
         let timeOfDay = try XCTUnwrap(tools.first)
@@ -151,11 +151,11 @@ final class AllToolsSyntaxTests: XCTestCase {
             FunctionTool(service: .claude, function: Self.timeOfDay)
         ]
 
-        let filledTemplate = try AllToolsSyntax.render(with: object)
+        let filledTemplate = try AllToolsJSONStringSyntax.render(with: object, service: .claude)
         let jsonString = filledTemplate.split(separator: "\n").dropFirst(2).dropLast(2).joined(separator: "\n")
 
         let jsonData = try XCTUnwrap(jsonString.data(using: .utf8))
-        let tools = try FunctionCallingDecoder.decode([Tool].self, from: jsonData)
+        let tools = try FunctionCallingService.claude.decoder.decode([Tool].self, from: jsonData)
 
         XCTAssertEqual(tools.count, 2)
 
@@ -193,11 +193,11 @@ final class AllToolsSyntaxTests: XCTestCase {
             FunctionTool(service: .claude, function: Self.getSomething)
         ]
 
-        let filledTemplate = try AllToolsSyntax.render(with: object)
+        let filledTemplate = try AllToolsJSONStringSyntax.render(with: object, service: .claude)
         let jsonString = filledTemplate.split(separator: "\n").dropFirst(2).dropLast(2).joined(separator: "\n")
 
         let jsonData = try XCTUnwrap(jsonString.data(using: .utf8))
-        let tools = try FunctionCallingDecoder.decode([Tool].self, from: jsonData)
+        let tools = try FunctionCallingService.claude.decoder.decode([Tool].self, from: jsonData)
 
         XCTAssertEqual(tools.count, 1)
         let getSomething = try XCTUnwrap(tools.first)

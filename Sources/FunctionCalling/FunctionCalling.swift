@@ -10,6 +10,6 @@ import CommonModules
 @attached(peer)
 public macro CallableFunction() = #externalMacro(module: "FunctionCallingMacros", type: "CallableFunctionMacro")
 
-@attached(extension, conformances: ToolContainer, names: named(execute), named(allTools))
+@attached(extension, conformances: ToolContainer, names: named(execute), named(allTools), named(allToolsJSONString), named(service))
 // swiftlint:disable:next line_length
 public macro FunctionCalling(service: FunctionCallingService) = #externalMacro(module: "FunctionCallingMacros", type: "FunctionCallingMacro")

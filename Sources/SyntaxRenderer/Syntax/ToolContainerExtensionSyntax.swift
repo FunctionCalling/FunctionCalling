@@ -19,9 +19,13 @@ public enum ToolContainerExtensionSyntax {
     public static func render(from object: ToolContainerExtension) throws -> ExtensionDeclSyntax {
         try ExtensionDeclSyntax("""
         extension \(raw: object.type): ToolContainer {
-            \(raw: object.executeSyntax)
+            \(raw: object.serviceSytnax)
+
+            \(raw: object.allToolsJSONStringSyntax)
 
             \(raw: object.allToolsSyntax)
+        
+            \(raw: object.executeSyntax)
         }
         """)
     }

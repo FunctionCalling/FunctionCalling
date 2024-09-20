@@ -15,4 +15,12 @@ public enum FunctionCallingService: String, Codable {
     case chatGPT
     /// [Llama](https://www.llama-api.com) and [Gemini](https://ai.google.dev/gemini-api) has the same structure
     case llamaOrGemini
+
+    public var decoder: JSONDecoder {
+        return FunctionCallingDecoder.jsonDecoder
+    }
+
+    public var encoder: JSONEncoder {
+        return FunctionCallingEncoder.jsonEncoder
+    }
 }

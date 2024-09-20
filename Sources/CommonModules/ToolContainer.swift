@@ -17,7 +17,11 @@ public protocol ToolContainer {
     func execute(methodName name: String, parameters: [String: Any]) async -> String
 
     /// A `String` representing all tools in the container.
-    var allTools: String { get }
+    var allTools: [Tool]? { get }
+
+    var allToolsJSONString: String { get }
+
+    var service: FunctionCallingService { get }
 }
 
 extension ToolContainer {

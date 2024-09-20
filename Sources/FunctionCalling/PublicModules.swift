@@ -10,7 +10,7 @@ import CommonModules
 
 public typealias Tool = CommonModules.Tool
 public typealias InputSchema = CommonModules.InputSchema
+public typealias FunctionCallingService = CommonModules.FunctionCallingService
 
 public typealias ToolContainer = CommonModules.ToolContainer
 public typealias FunctionCallingError = CommonModules.FunctionCallingError
-public typealias FunctionCallingDecoder = CommonModules.FunctionCallingDecoder

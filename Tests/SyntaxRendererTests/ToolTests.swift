@@ -59,7 +59,7 @@ final class ToolTests: XCTestCase {
 
     func testEncodeForClaude() throws {
         let tool = Self.getHTML()
-        let jsonData = try FunctionCallingEncoder.encode(tool)
+        let jsonData = try FunctionCallingService.claude.encoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
             // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
@@ -84,8 +84,8 @@ final class ToolTests: XCTestCase {
 
     func testDecodeForClaude() throws {
         let tool = Self.getHTML()
-        let jsonData = try FunctionCallingEncoder.encode(tool)
-        let result = try FunctionCallingDecoder.decode(Tool.self, from: jsonData)
+        let jsonData = try FunctionCallingService.claude.encoder.encode(tool)
+        let result = try FunctionCallingService.claude.decoder.decode(Tool.self, from: jsonData)
 
         XCTAssertEqual(result.name, "getHTML")
         XCTAssertEqual(result.service, .claude)
@@ -101,7 +101,7 @@ final class ToolTests: XCTestCase {
 
     func testEncodeForChatGPT() throws {
         let tool = Self.getHTML(service: .chatGPT)
-        let jsonData = try FunctionCallingEncoder.encode(tool)
+        let jsonData = try FunctionCallingService.chatGPT.encoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
             // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
@@ -126,8 +126,8 @@ final class ToolTests: XCTestCase {
 
     func testDecodeForChatGPT() throws {
         let tool = Self.getHTML(service: .chatGPT)
-        let jsonData = try FunctionCallingEncoder.encode(tool)
-        let result = try FunctionCallingDecoder.decode(Tool.self, from: jsonData)
+        let jsonData = try FunctionCallingService.chatGPT.encoder.encode(tool)
+        let result = try FunctionCallingService.chatGPT.decoder.decode(Tool.self, from: jsonData)
 
         XCTAssertEqual(result.name, "getHTML")
         XCTAssertEqual(result.service, .chatGPT)
@@ -143,7 +143,7 @@ final class ToolTests: XCTestCase {
 
     func testEncodeForLlamaOrGemini() throws {
         let tool = Self.getHTML(service: .llamaOrGemini)
-        let jsonData = try FunctionCallingEncoder.encode(tool)
+        let jsonData = try FunctionCallingService.llamaOrGemini.encoder.encode(tool)
         if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
             // swiftlint:disable:next force_cast
             XCTAssertEqual(dictionary["name"] as! String, "getHTML")
@@ -168,8 +168,8 @@ final class ToolTests: XCTestCase {
 
     func testDecodeForLlamaOrGemini() throws {
         let tool = Self.getHTML(service: .llamaOrGemini)
-        let jsonData = try FunctionCallingEncoder.encode(tool)
-        let result = try FunctionCallingDecoder.decode(Tool.self, from: jsonData)
+        let jsonData = try FunctionCallingService.llamaOrGemini.encoder.encode(tool)
+        let result = try FunctionCallingService.llamaOrGemini.decoder.decode(Tool.self, from: jsonData)
 
         XCTAssertEqual(result.name, "getHTML")
         XCTAssertEqual(result.service, .llamaOrGemini)

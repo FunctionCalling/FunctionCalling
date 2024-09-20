@@ -1,28 +1,24 @@
 //
 //  AllToolsTemplate.swift
+//  FunctionCalling
 //
-//
-//  Created by 伊藤史 on 2024/05/20.
+//  Created by 伊藤史 on 2024/09/20.
 //
 
-import Foundation
 import CommonModules
 
-/// An enumeration for different templates used to render all tools.
+/// An enumeration for different templates used to render all `[Tool]` from json string.
 enum AllToolsTemplate {
-    /// Renders the tools using the specified template.
-    /// - Parameter templateObject: An array of `Tool` objects to be rendered.
-    /// - Throws: An error if the rendering or encoding fails.
+    /// Renders the converting logics from json string to `[Tool]`.
     /// - Returns: A `String` representation of the rendered tools.
-    static func render(with templateObject: [FunctionTool]) throws -> String {
-        let tools = try FunctionCallingEncoder.encode(templateObject)
-        let jsonString = String(decoding: tools, as: UTF8.self)
-
+    static func render() -> String {
         return """
-        var allTools: String {
-            \"""
-            \(jsonString.emptyLineRemoved.replacingOccurrences(of: "\n", with: ""))
-            \"""
+        var allTools: [Tool]? {
+            guard let data = allToolsJSONString.replacingOccurrences(of: "\\n", with: "").data(using: .utf8) else {
+                return nil
+            }
+
+            return try? service.decoder.decode([Tool].self, from: data)
         }
         """
     }
