@@ -10,7 +10,7 @@ on:
     branches: "*"
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v5
     - name: Install swiftlint
