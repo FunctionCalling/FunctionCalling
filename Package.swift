@@ -21,7 +21,7 @@ let package = Package(
     dependencies: [
         // Depend on the Swift 5.9 release of SwiftSyntax
         .package(url: "https://github.com/apple/swift-syntax.git", from: "602.0.0"),
-        .package(url: "https://github.com/groue/GRMustache.swift", from: "6.0.0"),
+        .package(url: "https://github.com/groue/GRMustache.swift", from: "7.0.0"),
         .package(url: "https://github.com/fumito-ito/DocumentationComment.git", exact: "0.0.6")
     ],
     targets: [
